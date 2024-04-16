@@ -1,0 +1,70 @@
+pipeline {
+   agent any
+    tools {
+        maven 'maven3.8.8'
+        //jfrog 'artifactory-test'
+    }
+
+    stages {
+        stage('Build'){
+            steps {
+                echo 'Witout Checkout form jenkingsfile-hernan, implicited was done.. skiptest';
+                //git 'https://github.com/hernan179/spring-petclinic-rest.git'
+                sh 'mvn clean install -DskipTests -B -ntp'
+                echo '======================= ansible local ==============='
+            }
+        }
+        stage('Testing'){
+            steps {
+                echo 'Testing...'
+                sh 'mvn test -B -ntp'
+            }
+            post{
+                success{
+                    echo 'executing jacoco..'
+                    jacoco()
+                    echo 'excuting JUnit...'
+                    junit 'target/surefire-reports/*.xml'
+                }
+                always{
+                    echo 'Validation was done'
+                }
+                failure {
+                    echo 'Error was out come while it was processing'
+                }
+            }
+        }
+        stage('Deploy'){
+            /*agent {
+                docker {
+                    image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
+                    args '-u root'
+                }
+            }*/
+          
+            steps {
+
+             echo '======================= ansible Docker aws ==============='
+             sh 'ansible --version'
+             sh 'env | sort'
+
+             sshagent (
+                 credentials: ['jboss-private-key']
+                ){
+
+             echo 'step one Execute command on ubutu instal jboss'
+             sh 'ansible-inventory -i hosts --list -y'
+             echo 'step two Execute command on ubutu instal jboss'
+             sh 'ansible-playbook -i /etc/ansible/hosts /etc/ansible/server1_jboss.yml'
+
+             
+
+   
+            //ssh "jboss-eap-7.4/bin/jboss-cli.sh --user=$JBOSS_CREDENTIALS_USR --password=$JBOSS_CREDENTIALS_PSW -c --command='undeploy applicationPetstore.war'"
+            //sh 'cp -a /root/.jenkins/workspace/spring-petclinic-rest-final/target/spring-pet*.war /opt/jboss/jboss-eap-7.3/standalone/deployments/'
+            }
+         }
+        }
+    }
+}
+
