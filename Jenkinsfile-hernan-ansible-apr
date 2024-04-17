@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-		 stage('sonar'){// token squ_eac817640dc7f61f653eb427040c8e534c16b58c   Name: sonar_qube_final , I Used in jenkins with name "sonarqube-credencial2"
+		 stage('sonar'){// token   Name: sonar_qube_final , I Used in jenkins with name "sonarqube-credencial2"
             steps{
                 echo 'Quality with sonar qube!'
                 withSonarQubeEnv('sonarqube'){ // setting in jenkins conf with credential
