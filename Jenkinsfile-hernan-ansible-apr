@@ -74,7 +74,7 @@ pipeline {
                          repository = repository + '-DEV'
                     }
                     
-                    echo 'Destination repository ' + repository
+                    echo 'Destination repository-> ' + repository
                     def uploadSpec = """
                         {
                             "files": [
@@ -109,9 +109,9 @@ pipeline {
                  credentials: ['jboss-private-key']
                 ){
 
-             echo 'step one Execute command on ubutu instal jboss'
+             echo 'step one Execute command on ubutu install jboss'
              sh 'ansible-inventory -i hosts --list -y'
-             echo 'step two Execute command on ubutu instal jboss'
+             echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i /etc/ansible/hosts /etc/ansible/server1_jboss.yml'
 
              
