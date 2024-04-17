@@ -104,7 +104,7 @@ pipeline {
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
              sh 'env | sort'
-
+ echo '============looking for a jboss-private-key ============='
              sshagent (
                  credentials: ['jboss-private-key']
                 ){
@@ -113,8 +113,7 @@ pipeline {
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i /etc/ansible/hosts /etc/ansible/server1_jboss.yml'
-
-             
+           
 
    
             //ssh "jboss-eap-7.4/bin/jboss-cli.sh --user=$JBOSS_CREDENTIALS_USR --password=$JBOSS_CREDENTIALS_PSW -c --command='undeploy applicationPetstore.war'"
