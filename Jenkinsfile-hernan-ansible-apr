@@ -29,7 +29,7 @@ pipeline {
              sh 'env | sort'
              echo '============looking for a jboss-private-key ============='
              sshagent (
-                 credentials: ['jboss-private-key']
+                 credentials: ['jenkins']//jboss-private-key
                 ){
 
              echo 'step one Execute command on ubutu install jboss'
@@ -46,3 +46,4 @@ pipeline {
         }
     }
 }
+
