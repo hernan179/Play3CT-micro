@@ -43,7 +43,7 @@ pipeline {
              sh 'ansible --version'
              sh 'env | sort'
              echo '============looking for a jboss-private-key (1)============='
-             sh 'ssh-add -l'
+             //sh 'ssh-add -l'
              echo '============looking for a jboss-private-key (2) ============='
              sshagent (
                  credentials: ['jboss-private-key']
