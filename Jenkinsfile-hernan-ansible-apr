@@ -27,42 +27,7 @@ pipeline {
             steps {
                 echo '=============actifactory===='
            }
-        }
-		
-        stage('Deploy'){
-            /*agent {
-                docker {
-                    image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
-                    args '-u root'
-                }
-            }*/
-          
-            steps {
-
-           echo '=============Deploy===='
-             sh 'ansible --version'
-             sh 'env | sort'
-             echo '============looking for a jboss-private-key (1)============='
-             //sh 'ssh-add -l'
-             echo '============looking for a jboss-private-key (2) ============='
-             sshagent (
-                 credentials: ['jboss-private-key']
-                ){
-
-             echo 'step one Execute command on ubutu install jboss'
-             //sh 'ansible-inventory -i hosts --list -y'
-             
-             echo 'step two Execute command on ubutu install jboss'
-             //sh 'ansible-playbook -i /etc/ansible/hosts /etc/ansible/server1_jboss.yml'
-
-           
-
-   
-            //ssh "jboss-eap-7.4/bin/jboss-cli.sh --user=$JBOSS_CREDENTIALS_USR --password=$JBOSS_CREDENTIALS_PSW -c --command='undeploy applicationPetstore.war'"
-            //sh 'cp -a /root/.jenkins/workspace/spring-petclinic-rest-final/target/spring-pet*.war /opt/jboss/jboss-eap-7.3/standalone/deployments/'
-            }
-         }
-        }
+        }   
     }
 }
 
