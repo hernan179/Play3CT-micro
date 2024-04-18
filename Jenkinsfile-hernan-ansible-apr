@@ -27,7 +27,7 @@ pipeline {
             steps {
 
              echo '======================= ansible Docker aws ==============='
-             sh 'ansible --version'
+             
              sh 'env | sort'
              echo '============looking for a jboss-private-key ============='
              sshagent (
