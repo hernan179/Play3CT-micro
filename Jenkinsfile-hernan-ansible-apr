@@ -7,17 +7,26 @@ pipeline {
 
     stages {
         stage('Build'){
-           
+           steps {
+            echo '=============Build===='
+           }
         }
         stage('Testing'){
-           
+            steps {
+                echo '=============Testing===='
+           }
+
         }
 		 stage('sonar'){// token   Name: sonar_qube_final , I Used in jenkins with name "sonarqube-credencial2"
-            
+             steps {
+                echo '=============sonar===='
+           }
         }
 
          stage('actifactory'){
-           
+            steps {
+                echo '=============actifactory===='
+           }
         }
 		
         stage('Deploy'){
@@ -30,7 +39,7 @@ pipeline {
           
             steps {
 
-             echo '======================= ansible Docker aws ==============='
+           echo '=============Deploy===='
              sh 'ansible --version'
              sh 'env | sort'
              echo '============looking for a jboss-private-key ============='
