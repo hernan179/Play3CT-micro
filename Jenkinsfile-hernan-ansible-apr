@@ -33,9 +33,10 @@ pipeline {
                 ){
 
              echo 'step one Execute command on ubutu install jboss'
-             sh 'ansible-inventory -i hosts --list -y'
+              sh 'ansible server1 -i hosts -a "cat /etc/os-release" -u ubuntu'
+             //sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
-             sh 'ansible-playbook -i hosts /etc/ansible/server1_jboss.yml'
+             //sh 'ansible-playbook -i hosts /etc/ansible/server1_jboss.yml'
            
 
    
