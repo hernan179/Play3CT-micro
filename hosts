@@ -1,2 +1,2 @@
 [servers]
-server1 ansible_host=13.59.72.254     ansible_connection=ssh     ansible_user=ubuntu    ansible_become=yes      ansible_ssh_private_key_file=/opt/mitocode/jboss-private-key.pem
+server1 ansible_host=13.59.72.254     ansible_connection=ssh     ansible_user=ubuntu    ansible_become=yes
