@@ -15,12 +15,12 @@ pipeline {
             }
         }
         stage('Deploy'){
-            /*agent {
+            agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
                 }
-            }*/
+            }
           
             steps {
 
@@ -36,7 +36,7 @@ pipeline {
              sh 'ansible server1 -i hosts -a "cat /etc/os-release" -u ubuntu'
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
-             sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml'
+             sh 'ansible-playbook -i hosts /server1_jboss.yml'
            
 
    
