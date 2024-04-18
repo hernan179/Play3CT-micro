@@ -28,12 +28,13 @@ pipeline {
              sh 'ansible --version'
              sh 'env | sort'
              echo '============looking for a jboss-private-key ============='
-            
+             sshagent (credentials: ['jboss-private-key']) {
+           
 
              echo 'step one Execute command on ubutu install jboss'
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
-             sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml'
+             sh 'ansible-playbook -i hosts server1_jboss.yml'
            
 
    
