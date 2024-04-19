@@ -32,10 +32,10 @@ pipeline {
                     echo '===============================actifactory...saving start =====================================================';
 
                     script {
-                        def artifactoryServer = Artifactory.server
+                        def artifactoryServer = server
                         // To see all properties (Please note that this might expose the credentials!)
                         artifactoryServer.properties.each { 
-                            println "$it.key -> $it.value" 
+                            echo "$it.key -> $it.value" 
                             }
                         // To get URL
                         echo artifactoryServer.url
