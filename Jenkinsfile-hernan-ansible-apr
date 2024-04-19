@@ -20,10 +20,19 @@ pipeline {
                  script {
                      echo '';
 
-echo '===============================actifactory...saving start =====================================================';
+                    
+                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                    
+                    def server = Artifactory.server 'artifactory-test'
+                    def repository = artifactId;
+                    
+                    echo 'Deploy to '+server; 
+
+                    echo '===============================actifactory...saving start =====================================================';
 
                     script {
-                        def artifactoryServer = getArtifactoryServer 'jfrog_instance_id'
+                        def artifactoryServer = Artifactory.server
                         // To see all properties (Please note that this might expose the credentials!)
                         artifactoryServer.properties.each { 
                             println "$it.key -> $it.value" 
@@ -36,15 +45,6 @@ echo '===============================actifactory...saving start ================
                     }
 echo '===========================================actifactory...end=========================================';
 
-
-                    
-                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
-                    
-                    def server = Artifactory.server 'artifactory-test'
-                    def repository = artifactId;
-                    
-                    echo 'Deploy to '+server; 
 
                     
                 
