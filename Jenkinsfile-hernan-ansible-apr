@@ -13,6 +13,9 @@ pipeline {
                 //git 'https://github.com/hernan179/Play3CT.git'
                 sh 'mvn clean install -DskipTests -B -ntp'
                 echo '======================= ansible local ==============='
+                sh "set" 
+                   echo "${env.JOB_BASE_NAME}";
+
             }
         }
          stage('artifactory'){
@@ -31,9 +34,7 @@ pipeline {
                   //  def pom = readMavenPom file: 'pom.xml'
                    // println pom
 
-                   sh "set" 
-                   echo "${env.JOB_BASE_NAME}";
-
+                   
     echo '----------set----------------------------';
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                     def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
