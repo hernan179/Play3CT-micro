@@ -18,11 +18,15 @@ pipeline {
          stage('artifactory'){
             steps {
                  script {
-                     echo '------------------------POM-----------------------';
+                     echo '------------------------evn-----------------------';
 
                     
+                    sh 'env | sort'
+                      echo '------------------------pom-----------------------';
+
                     def pom = readMavenPom file: 'pom.xml'
-                    println pom
+                   // println pom
+
 
 
 
