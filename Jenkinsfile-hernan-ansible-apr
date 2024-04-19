@@ -27,25 +27,7 @@ pipeline {
                     def server = Artifactory.server 'artifactory-test'
                     def repository = artifactId;
                     
-                    echo 'Deploy to '+server; 
-
-                    echo '===============================actifactory...saving start =====================================================';
-
-                    script {
-                        def artifactoryServer = server
-                        // To see all properties (Please note that this might expose the credentials!)
-                        artifactoryServer.properties.each { 
-                            echo "$it.key -> $it.value" 
-                            }
-                        // To get URL
-                        echo artifactoryServer.url
-                        // To get credentialsId
-                        echo artifactoryServer.credentialsId
-                        // etc...
-                    }
-echo '===========================================actifactory...end=========================================';
-
-
+                    echo 'Deploy to properties '+server.properties; 
                     
                 
                     echo 'version of '+version
