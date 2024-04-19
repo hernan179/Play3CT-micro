@@ -27,7 +27,7 @@ pipeline {
                     def server = Artifactory.server 'artifactory-test'
                     def repository = artifactId;
                     
-                    echo 'Deploy to properties '+Artifactory.system.properties;
+                    echo 'Deploy to properties '+Artifactory.properties;
                                     
                 
                     echo 'version of '+version
