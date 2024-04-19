@@ -5,6 +5,7 @@ pipeline {
         //jfrog 'artifactory-test'
     }
 
+
     stages {
         stage('Build'){
             steps {
@@ -14,6 +15,53 @@ pipeline {
                 echo '======================= ansible local ==============='
             }
         }
+         stage('actifactory'){
+            steps {
+                 script {
+                     echo 'actifactory...saving';
+                    
+                    def server = Artifactory.server 'artifactory-test'
+                    def repository = 'Play3CT'
+                    
+                    echo 'Deploy to '+server; 
+
+                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                
+                    echo 'version of '+version
+                    echo 'artifactId '+artifactId 
+
+                    SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
+                    echo 'Brach: '+SOURCE_HASH; 
+
+                    def branch_nem = scm.branches[0].name
+                    if (branch_nem.contains("*/")) {
+                        branch_nem = branch_nem.split("\\*/")[1]
+                    }
+   
+                    if(branch_nem == 'master' || branch_nem == 'origin' || branch_nem == 'main'){
+                        repository = repository + '-PROD'
+                    }else{
+                         repository = repository + '-DEV'
+                    }
+                    
+                    echo 'Destination repository-> ' + repository
+                    def uploadSpec = """
+                        {
+                            "files": [
+                                {
+                                    "pattern": "target/.*.war",
+                                    "target": "$repository",
+                                    "regexp": "true"
+                                }
+                            ]
+                        }
+                    """
+                    server.upload spec: uploadSpec
+                 }
+            }
+        }
+
         stage('Deploy'){
             /*agent {
                 docker {
@@ -23,6 +71,10 @@ pipeline {
             }*/
           
             steps {
+
+             echo "BRANCH_NAME is " + ${env.BRANCH_NAME}
+
+
 
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
