@@ -18,9 +18,14 @@ pipeline {
          stage('artifactory'){
             steps {
                  script {
-                     echo '';
+                     echo '------------------------POM-----------------------';
 
                     
+                    def pom = readMavenPom file: 'pom.xml'
+                    println pom
+
+
+
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                     def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
                     
