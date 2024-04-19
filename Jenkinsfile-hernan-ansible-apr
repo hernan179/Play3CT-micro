@@ -18,7 +18,25 @@ pipeline {
          stage('actifactory'){
             steps {
                  script {
-                     echo 'actifactory...saving';
+                     echo '';
+
+echo '===============================actifactory...saving start =====================================================';
+
+                    script {
+                        def artifactoryServer = getArtifactoryServer 'jfrog_instance_id'
+                        // To see all properties (Please note that this might expose the credentials!)
+                        artifactoryServer.properties.each { 
+                            println "$it.key -> $it.value" 
+                            }
+                        // To get URL
+                        echo artifactoryServer.url
+                        // To get credentialsId
+                        echo artifactoryServer.credentialsId
+                        // etc...
+                    }
+echo '===========================================actifactory...end=========================================';
+
+
                     
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                     def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
@@ -50,7 +68,6 @@ pipeline {
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
                     echo 'DESTINATION VERSION       ' + version;
-                   // echo 'DESTINATION REP       ' + server.name;
                     echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+'/'+repository+'/'+artifactId+'-'+version+'.war';
                     def uploadSpec = """
                         {
