@@ -15,10 +15,11 @@ pipeline {
                 echo '======================= ansible local ==============='
             }
         }
-         stage('actifactory'){
+         stage('artifactory'){
             steps {
                  script {
-                     echo '';
+                     echo 'Artifactory...........................................';
+                     sh 'env | sort'
 
                     
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
@@ -27,8 +28,7 @@ pipeline {
                     def server = Artifactory.server 'artifactory-test'
                     def repository = artifactId;
                     
-                    echo 'Deploy to properties '+Artifactory;
-                                    
+                                           
                 
                     echo 'version of '+version
                     echo 'artifactId '+artifactId 
