@@ -50,8 +50,8 @@ pipeline {
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
                     echo 'DESTINATION VERSION       ' + version;
-                    echo 'DESTINATION REP       ' + server.repository;
-                    echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+"/"+repository+"-"+version+".war";
+                    echo 'DESTINATION REP       ' + server.name;
+                    echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+'/'+repository+'-'+version+'.war';
                     def uploadSpec = """
                         {
                             "files": [
