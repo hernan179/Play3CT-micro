@@ -20,13 +20,15 @@ pipeline {
                  script {
                      echo 'actifactory...saving';
                     
+                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                    
                     def server = Artifactory.server 'artifactory-test'
-                    def repository = 'Play3CT'
+                    def repository = artifactId;
                     
                     echo 'Deploy to '+server; 
 
-                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                    
                 
                     echo 'version of '+version
                     echo 'artifactId '+artifactId 
@@ -45,7 +47,10 @@ pipeline {
                          repository = repository + '-DEV'
                     }
                     
-                    echo 'Destination repository-> ' + repository
+                    echo 'DESTINATION TO REPOSITORY ' + repository;
+                    echo 'DESTINATION PROJECT       ' + artifactId;
+                    echo 'DESTINATION VERSION       ' + version;
+                    echo 'DESTINATION FULL PATH     ';
                     def uploadSpec = """
                         {
                             "files": [
@@ -57,6 +62,8 @@ pipeline {
                             ]
                         }
                     """
+                   echo "DESTINATION FULL PATH   "+uploadSpec;
+                   
                     server.upload spec: uploadSpec
                  }
             }
@@ -71,10 +78,6 @@ pipeline {
             }*/
           
             steps {
-
-             echo "BRANCH_NAME is " + ${env.BRANCH_NAME}
-
-
 
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
