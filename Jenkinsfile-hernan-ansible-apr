@@ -28,6 +28,7 @@ pipeline {
                    // println pom
 
                    sh "set" 
+                   echo "${env.JOB_BASE_NAME}";
 
     echo '----------set----------------------------';
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
