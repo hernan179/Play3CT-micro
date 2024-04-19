@@ -22,7 +22,7 @@ pipeline {
 
                     
                     sh 'env | sort'
-                      echo '----------STAGE_NAME--------------------------------';
+                      echo '----------STAGE_NAME---------'${STAGE_NAME}'-----------------------';
 
                   //  def pom = readMavenPom file: 'pom.xml'
                    // println pom
