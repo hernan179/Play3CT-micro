@@ -27,55 +27,41 @@ pipeline {
                    // sh 'env | sort'
                     echo '----------STAGE_NAME----------------------------';
 
-                    //pom = readMavenPom file: 'pom.xml'
-                    //pom.artifactId
-                    //pom.version
-
                     def pom = readMavenPom file: 'pom.xml'
                     //println pom
 
                  
 
-                    def version = pom.version; //sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                    def artifactId = pom.artifactId; //sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                    def version = pom.version; 
+                    def artifactId = pom.artifactId; 
 
         
                     
                     def server = Artifactory.server 'artifactory-test'
-                    def repository = artifactId;
+                    def repository = "Play3CT-DEV";
                     def empack = pom.packaging;
-                    
-                    echo 'Deploy to properties ';
-                                    
-                
-                    echo 'version of '+version
-                    echo 'artifactId '+artifactId 
-                    echo "_GIT_BRANCH "+env.GIT_BRANCH;
-
-
    
                     if(env.GIT_BRANCH == 'origin/master'){
                         repository = repository + '-PROD'
-                    }else{
-                         repository = repository + '-DEV'
                     }
+                    def fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
                     
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
                     echo 'DESTINATION VERSION       ' + version;
-                    echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
+                    echo 'DESTINATION FULL PATH     '+fullURL;
                     def uploadSpec = """
                         {
                             "files": [
                                 {
-                                    "pattern": "target/.*.war",
+                                    "pattern": "target/.*.$empack",
                                     "target": "$repository",
                                     "regexp": "true"
                                 }
                             ]
                         }
                     """
-                  
+                  echo uploadSpec;
                     server.upload spec: uploadSpec
                  }
             }
