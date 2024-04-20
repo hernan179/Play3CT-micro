@@ -49,7 +49,7 @@ pipeline {
                     }else{
                          repository = repository + '-PROD'
                     }
-                    fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
+                    env.fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
                     
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
@@ -67,7 +67,7 @@ pipeline {
                         }
                     """
                   echo uploadSpec;
-                  //  server.upload spec: uploadSpec
+                    server.upload spec: uploadSpec
                  }
             }
         }
