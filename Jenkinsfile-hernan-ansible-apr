@@ -38,11 +38,13 @@ pipeline {
         
                     
                     def server = Artifactory.server 'artifactory-test'
-                    def repository = "Play3CT-DEV";
+                    def repository = "Play3CT";
                     def empack = pom.packaging;
    
                     if(env.GIT_BRANCH == 'origin/master'){
                         repository = repository + '-PROD'
+                    }else{
+                         repository = repository + '-PROD'
                     }
                     def fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
                     
