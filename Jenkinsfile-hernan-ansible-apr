@@ -80,7 +80,7 @@ pipeline {
                 }
             }*/
 
-          echo "______>>>>> ${env.fullURL}"
+          echo "______>>>>> $env.fullURL"
             steps {
 
              echo '======================= ansible Docker aws ==============='
