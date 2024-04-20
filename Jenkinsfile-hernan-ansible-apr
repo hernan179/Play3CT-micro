@@ -54,7 +54,7 @@ pipeline {
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
                     echo 'DESTINATION VERSION       ' + version;
-                    echo 'DESTINATION FULL PATH     '+fullURL;
+                    echo 'DESTINATION FULL PATH     '+env.fullURL;
                     def uploadSpec = """
                         {
                             "files": [
@@ -67,7 +67,7 @@ pipeline {
                         }
                     """
                   echo uploadSpec;
-                    server.upload spec: uploadSpec
+                  //server.upload spec: uploadSpec
                  }
             }
         }
@@ -83,7 +83,7 @@ pipeline {
         
             steps {
 
-                  echo "______>>>>> $env.fullURL"
+                  echo "______>>>>> "+env.fullURL
 
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
