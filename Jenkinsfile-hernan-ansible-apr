@@ -34,6 +34,8 @@ pipeline {
                     def pom = readMavenPom file: 'pom.xml'
                     println pom
 
+                    echo "POM DETAILS artifactId: "+{pom.artifactId}+"  version: "+{pom.version};
+
                    
     echo '----------set----------------------------';
                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
