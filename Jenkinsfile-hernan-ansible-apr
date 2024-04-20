@@ -31,7 +31,7 @@ pipeline {
                     //pom.artifactId
                     //pom.version
 
-                  //  def pom = readMavenPom file: 'pom.xml'
+                  def pom = readMavenPom file: 'pom.xml'
                    // println pom
 
                    
