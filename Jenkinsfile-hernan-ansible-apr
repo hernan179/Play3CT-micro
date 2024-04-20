@@ -3,7 +3,6 @@ pipeline {
     tools {
         maven 'maven3.8.8'
         //jfrog 'artifactory-test'
-        env.fullURL = ''
     }
     parameters {
             string(name: 'fullURL', defaultValue: '')
