@@ -1,3 +1,4 @@
+def fullURL = '';
 pipeline {
    agent any
     tools {
@@ -46,7 +47,7 @@ pipeline {
                     }else{
                          repository = repository + '-PROD'
                     }
-                    def fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
+                    fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
                     
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
@@ -76,7 +77,8 @@ pipeline {
                     args '-u root'
                 }
             }*/
-          
+
+          echo "______>>>>> ${fullURL}"
             steps {
 
              echo '======================= ansible Docker aws ==============='
