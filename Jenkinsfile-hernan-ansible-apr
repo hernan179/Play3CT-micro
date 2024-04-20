@@ -5,7 +5,9 @@ pipeline {
         //jfrog 'artifactory-test'
         env.fullURL = ''
     }
-    
+    parameters {
+            string(name: 'fullURL', defaultValue: '')
+    }
 
 
     stages {
@@ -66,7 +68,7 @@ pipeline {
                         }
                     """
                   echo uploadSpec;
-                //  server.upload spec: uploadSpec
+                  server.upload spec: uploadSpec
                  }
             }
         }
@@ -82,7 +84,7 @@ pipeline {
         
             steps {
 
-                  echo "______>>>>> "+env.fullURL
+                  echo "full url of artifactory UPLOAD "+env.fullURL
 
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
@@ -90,16 +92,10 @@ pipeline {
              echo '============looking for a jboss-private-key ============='
              sshagent (credentials: ['jboss-private-key']) {
            
-
              echo 'step one Execute command on ubutu install jboss'
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml'
-           
-
-   
-            //ssh "jboss-eap-7.4/bin/jboss-cli.sh --user=$JBOSS_CREDENTIALS_USR --password=$JBOSS_CREDENTIALS_PSW -c --command='undeploy applicationPetstore.war'"
-            //sh 'cp -a /root/.jenkins/workspace/spring-petclinic-rest-final/target/spring-pet*.war /opt/jboss/jboss-eap-7.3/standalone/deployments/'
            }   
          }
         }
