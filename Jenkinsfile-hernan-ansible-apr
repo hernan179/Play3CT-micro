@@ -43,12 +43,14 @@ pipeline {
                     
                     def server = Artifactory.server 'artifactory-test'
                     def repository = artifactId;
+                    def empack = pom.packaging;
                     
                     echo 'Deploy to properties ';
                                     
                 
                     echo 'version of '+version
                     echo 'artifactId '+artifactId 
+                    echo "_GIT_BRANCH "+env.GIT_BRANCH;
 
                     SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
                     echo 'Brach: '+SOURCE_HASH; 
@@ -67,7 +69,7 @@ pipeline {
                     echo 'DESTINATION TO REPOSITORY ' + repository;
                     echo 'DESTINATION PROJECT       ' + artifactId;
                     echo 'DESTINATION VERSION       ' + version;
-                    echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+'/'+repository+'/'+artifactId+'-'+version+'.war';
+                    echo 'DESTINATION FULL PATH  artifactoryUrl    '+server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
                     def uploadSpec = """
                         {
                             "files": [
