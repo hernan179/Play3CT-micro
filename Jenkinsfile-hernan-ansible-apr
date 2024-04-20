@@ -52,15 +52,9 @@ pipeline {
                     echo 'artifactId '+artifactId 
                     echo "_GIT_BRANCH "+env.GIT_BRANCH;
 
-                    SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
-                    echo 'Brach: '+SOURCE_HASH; 
 
-                    def branch_nem = scm.branches[0].name
-                    if (branch_nem.contains("*/")) {
-                        branch_nem = branch_nem.split("\\*/")[1]
-                    }
    
-                    if(branch_nem == 'master' || branch_nem == 'origin' || branch_nem == 'main'){
+                    if(env.GIT_BRANCH == 'origin/master'){
                         repository = repository + '-PROD'
                     }else{
                          repository = repository + '-DEV'
