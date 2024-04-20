@@ -1,9 +1,11 @@
-def fullURL = '';
 pipeline {
    agent any
     tools {
         maven 'maven3.8.8'
         //jfrog 'artifactory-test'
+    }
+    parameters {
+            string(name: 'fullURL', defaultValue: '')
     }
 
 
@@ -78,7 +80,7 @@ pipeline {
                 }
             }*/
 
-          echo "______>>>>> ${fullURL}"
+          echo "______>>>>> ${env.fullURL}"
             steps {
 
              echo '======================= ansible Docker aws ==============='
