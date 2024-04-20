@@ -34,7 +34,7 @@ pipeline {
                     def pom = readMavenPom file: 'pom.xml'
                     println pom
 
-                    echo "POM DETAILS artifactId: "+{pom.artifactId}+"  version: "+{pom.version};
+                    echo "POM DETAILS artifactId: "+${pom.artifactId}+"  version: "+{$pom.version};
 
                    
     echo '----------set----------------------------';
