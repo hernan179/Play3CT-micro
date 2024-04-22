@@ -2,7 +2,7 @@
   become: true
   remote_user: ubuntu
   tasks:
-  - name: Download jboss 7.4
+  - name: Download jboss 7.4 {{ dwnld }}
     ansible.builtin.get_url:
       url: https://software-installers-dc.s3.us-west-2.amazonaws.com/jboss-eap-7.4.0.zip
       dest: /home/ubuntu/jboss-eap-7.4.0.zip
