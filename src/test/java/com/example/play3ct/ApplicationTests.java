@@ -1,10 +1,10 @@
-package com.hackerrank.stereotypes;
+package com.example.play3ct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hackerrank.stereotypes.controller.ContactController;
-import com.hackerrank.stereotypes.model.Person;
-import com.hackerrank.stereotypes.repository.ContactRepository;
-import com.hackerrank.stereotypes.service.ContactService;
+import com.example.play3ct.controller.ContactController;
+import com.example.play3ct.model.Person;
+import com.example.play3ct.repository.ContactRepository;
+import com.example.play3ct.service.ContactService;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
