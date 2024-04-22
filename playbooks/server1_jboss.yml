@@ -13,3 +13,8 @@
       remote_src: yes
   - name: Create user
     command: /home/ubuntu/jboss-eap-7.4/bin/add-user.sh -u 'admin' -p 'admin'
+  - name: Deploy on jboss
+    ansible.builtin.get_url:
+      url: {{ dwnld }}
+      dest: /home/ubuntu/jboss-eap-7.4/standalone/deployments/
+  
