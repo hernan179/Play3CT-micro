@@ -1,4 +1,4 @@
-package com.hackerrank.stereotypes;
+package com.example.play3ct;
 
 import javax.sql.DataSource;
 

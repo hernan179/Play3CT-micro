@@ -1,10 +1,10 @@
-package com.hackerrank.stereotypes.repository;
+package com.example.play3ct.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
 	import org.springframework.stereotype.Repository;
 
-import com.hackerrank.stereotypes.model.Person;
+import com.example.play3ct.model.Person;
 
 
 @Repository

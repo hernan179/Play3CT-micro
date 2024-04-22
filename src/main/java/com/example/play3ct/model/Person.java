@@ -1,4 +1,4 @@
-package com.hackerrank.stereotypes.model;
+package com.example.play3ct.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

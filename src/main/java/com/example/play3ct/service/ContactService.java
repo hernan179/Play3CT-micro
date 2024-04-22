@@ -1,11 +1,11 @@
-package com.hackerrank.stereotypes.service;
+package com.example.play3ct.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.hackerrank.stereotypes.model.Person;
-import com.hackerrank.stereotypes.repository.ContactRepository;
+import com.example.play3ct.model.Person;
+import com.example.play3ct.repository.ContactRepository;
 
 @Service
 public class ContactService {

@@ -1,8 +1,8 @@
-package com.hackerrank.stereotypes.controller;
+package com.example.play3ct.controller;
 
 
-import com.hackerrank.stereotypes.model.Person;
-import com.hackerrank.stereotypes.service.ContactService;  
+import com.example.play3ct.model.Person;
+import com.example.play3ct.service.ContactService;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
