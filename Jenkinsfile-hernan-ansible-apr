@@ -73,6 +73,12 @@ pipeline {
         }
 
         stage('Deploy'){
+            
+            stage('Initialize'){
+             def dockerHome = tool 'mydocker'
+             env.PATH = "${dockerHome}/bin:${env.PATH}"
+            }
+            
             agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
