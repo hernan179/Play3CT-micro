@@ -71,14 +71,11 @@ pipeline {
                  }
             }
         }
-         stage('Initialize'){
-             def dockerHome = tool 'mydocker'
-             env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
 
         stage('Deploy'){
             
-           
+            def dockerHome = tool 'mydocker'
+             env.PATH = "${dockerHome}/bin:${env.PATH}"
             
             agent {
                 docker {
