@@ -79,11 +79,10 @@ pipeline {
                     args '-u root'
                 }
             }
-
         
             steps {
 
-                  echo "full url of artifactory UPLOAD "+env.fullURL
+            echo "full url of artifactory UPLOAD "+env.fullURL
 
              echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
