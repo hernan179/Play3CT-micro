@@ -5,17 +5,17 @@
   - name: Download jboss 7.4 {{ dwnld }}
     ansible.builtin.get_url:
       url: https://software-installers-dc.s3.us-west-2.amazonaws.com/jboss-eap-7.4.0.zip
-      dest: /home/ubuntu/jboss-eap-7.4.0.zip
+      dest: /opt/mitocode/jboss-eap-7.4.0.zip
   - name: Unzip jboss-eap-7.4.0.zip
     ansible.builtin.unarchive:
-      src: /home/ubuntu/jboss-eap-7.4.0.zip
-      dest: /home/ubuntu
+      src: /opt/mitocode//jboss-eap-7.4.0.zip
+      dest: /opt/mitocode/
       remote_src: yes
   - name: Create user
-    command: /home/ubuntu/jboss-eap-7.4/bin/add-user.sh -u 'admin' -p 'admin'
+    command: /opt/mitocode//jboss-eap-7.4/bin/add-user.sh -u 'admin' -p 'admin'
   - name: Deploy on jboss
     ansible.builtin.get_url:
       url: '{{ dwnld }}'
-      dest: /home/ubuntu/jboss-eap-7.4/standalone/deployments/
+      dest: /opt/mitocode//jboss-eap-7.4/standalone/deployments/
   - name: Start Jboss
-    command: sh /home/ubuntu/jboss-eap-7.4/bin/standalone.sh -b 0.0.0.0 &
+    command: sh /opt/mitocode//jboss-eap-7.4/bin/standalone.sh -b 0.0.0.0 &
