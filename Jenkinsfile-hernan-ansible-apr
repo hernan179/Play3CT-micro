@@ -74,8 +74,8 @@ pipeline {
 
         stage('Deploy'){
             
-            def dockerHome = tool 'mydocker'
-             env.PATH = "${dockerHome}/bin:${env.PATH}"
+           // def dockerHome = tool 'mydocker'
+            // env.PATH = "${dockerHome}/bin:${env.PATH}"
             
             agent {
                 docker {
