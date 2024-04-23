@@ -2,9 +2,9 @@
   become: true
   remote_user: ubuntu
   tasks:
-  - name: Install java 17
+  - name: Install java 8
     apt:
-      name: openjdk-17-jdk
+      name: openjdk-8-jdk
       state: latest
   - name: Install unzip
     apt:
