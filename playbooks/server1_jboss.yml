@@ -11,9 +11,14 @@
       src: /home/ubuntu/jboss-eap-7.3.zip
       dest: /home/ubuntu/
       remote_src: yes
+  - name: Create symlink
+    file:
+      src: "{{eap_home}}"
+      dest: "/home/ubuntu/jboss-eap"
+      state: link
   - name: Deploy on jboss
     ansible.builtin.get_url:
       url: '{{ dwnld }}'
       dest: /home/ubuntu/jboss-eap-7.3/standalone/deployments/
   - name: Start Jboss
-    command: nohup sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
+    command: sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
