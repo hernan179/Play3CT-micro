@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
 	<artifactId>Play3CT</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 	<packaging>war</packaging>
 
 	<parent>
@@ -42,6 +42,23 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- FIN Para despliegue -->
+
+		<!-- add slf4j interfaces to classpath -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.6.4</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- add commons logging to slf4j bridge to classpath --> 
+<!-- acts as jcl but routes commons-logging calls to slf4j -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>jcl-over-slf4j</artifactId>
+    <version>1.6.4</version>
+    <scope>runtime</scope>
+</dependency>
 
 	</dependencies>
 
