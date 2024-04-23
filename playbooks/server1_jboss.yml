@@ -3,11 +3,11 @@
   remote_user: ubuntu
   tasks:
   - name: Install java 17
-    apt-get:
+    apt:
       name: java-17-openjdk
       state: latest
   - name: Install unzip
-    apt-get:
+    apt:
       name: unzip
       state: lates
   - name: Download jboss 7.4 {{ dwnld }}
