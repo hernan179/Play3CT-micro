@@ -11,11 +11,11 @@
       src: /home/ubuntu/jboss-eap-7.3.zip
       dest: /home/ubuntu/
       remote_src: yes
-  - name: Create user
-    command: /home/ubuntu/jboss-eap-7.3/bin/add-user.sh -u 'admin' -p 'admin'
   - name: Deploy on jboss
     ansible.builtin.get_url:
       url: '{{ dwnld }}'
       dest: /home/ubuntu/jboss-eap-7.3/standalone/deployments/
+  - name: Create user
+      command: /home/ubuntu/jboss-eap-7.3/bin/add-user.sh -u 'admin' -p 'admin'
   - name: Start Jboss
-    command: sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
+      command: sudo sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
