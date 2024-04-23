@@ -14,7 +14,7 @@
   - name: Create symlink
     file:
       src: "{{eap_home}}"
-      dest: "/home/ubuntu/jboss-eap"
+      dest: "/home/ubuntu/jboss-eap-7.3"
       state: link
   - name: Deploy on jboss
     ansible.builtin.get_url:
