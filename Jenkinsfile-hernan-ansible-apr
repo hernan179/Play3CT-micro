@@ -78,12 +78,12 @@ pipeline {
           
             // env.PATH = "${dockerHome}/bin:${env.PATH}"
             
-            agent {
+            /*agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
                 }//https://plugins.jenkins.io/docker-plugin/
-            }
+            }*/
         
             steps {
 
