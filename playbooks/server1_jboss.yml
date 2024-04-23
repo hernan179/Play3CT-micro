@@ -16,4 +16,4 @@
       url: '{{ dwnld }}'
       dest: /home/ubuntu/jboss-eap-7.3/standalone/deployments/
   - name: Start Jboss
-    command: sudo sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
+    command: sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
