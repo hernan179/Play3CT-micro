@@ -74,14 +74,14 @@ pipeline {
 
         stage('Deploy'){
             
-           // def dockerHome = tool 'mydocker'
+            def dockerHome = tool 'docker-centos'
             // env.PATH = "${dockerHome}/bin:${env.PATH}"
             
             agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
-                }
+                }//https://plugins.jenkins.io/docker-plugin/
             }
         
             steps {
