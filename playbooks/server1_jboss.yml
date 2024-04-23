@@ -11,6 +11,10 @@
       src: /home/ubuntu/jboss-eap-7.3.zip
       dest: /home/ubuntu/
       remote_src: yes
+  - name: Clean EAP directory
+      file:
+        state: absent
+        path: "{{ eap_home }}/"
   - name: Create symlink
     file:
       src: "{{eap_home}}"
