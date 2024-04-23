@@ -4,7 +4,7 @@
   tasks:
   - name: Install java 17
     apt:
-      name: java-17-openjdk
+      name: openjdk-17-jdk openjdk-17-jre
       state: latest
   - name: Install unzip
     apt:
