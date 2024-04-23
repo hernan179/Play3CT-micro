@@ -2,14 +2,14 @@
   become: true
   remote_user: ubuntu
   tasks:
-    - name: Install java 17
-    yum:
+  - name: Install java 17
+    apt-get:
       name: java-17-openjdk
       state: latest
   - name: Install unzip
-    yum:
+    apt-get:
       name: unzip
-      state: latest
+      state: lates
   - name: Download jboss 7.4 {{ dwnld }}
     ansible.builtin.get_url:
       url: https://software-installers-dc.s3.us-west-2.amazonaws.com/jboss-eap-7.4.0.zip
