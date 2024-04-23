@@ -51,6 +51,12 @@
     <scope>compile</scope>
 </dependency>
 
+<dependency>
+    <artifactId>commons-logging</artifactId>
+    <groupId>commons-logging</groupId>
+    <version>1.0</version>
+    <scope>provided</scope>
+</dependency>
 <!-- add commons logging to slf4j bridge to classpath --> 
 <!-- acts as jcl but routes commons-logging calls to slf4j -->
 <dependency>
