@@ -103,8 +103,8 @@ pipeline {
              }   
          }
          post {
-                success {
-                    sh 'curl http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping'
+                success {//def version = pom.version;  def artifactId = pom.artifactId; 
+                    sh 'curl http://3.17.160.80:8080/'+artifactId+version+'/contact/ping'
                     
                 }
                 always {
