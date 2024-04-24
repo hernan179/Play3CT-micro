@@ -46,46 +46,9 @@ pipeline {
                   echo 'passed test with sonarqube...'
             }
         }
-        stage('artifactory'){
-            steps {
-                 script {
-                    def pom = readMavenPom file: 'pom.xml'
-                    def version = pom.version; 
-                    def artifactId = pom.artifactId; 
-                    env.despliegue = 'http://3.17.160.80:8080/'+artifactId+'-'+version+'/contact/ping';
-                    def server = Artifactory.server 'artifactory-test'
-                    def repository = "Play3CT";
-                    def empack = pom.packaging;
-   
-                    if(env.GIT_BRANCH == 'origin/master'){
-                        repository = repository + '-PROD'
-                    }else{
-                         repository = repository + '-PROD'
-                    }
-                    env.fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
-                    def uploadSpec = """
-                        {
-                            "files": [
-                                {
-                                    "pattern": "target/.*.$empack",
-                                    "target": "$repository",
-                                    "regexp": "true"
-                                }
-                            ]
-                        }
-                    """
-                  server.upload spec: uploadSpec
-                 }
-            }
-        }
         stage('Deploy'){
             steps {
-             sh 'ansible --version'
-             sh 'env | sort'
-             sshagent (credentials: ['jboss-private-key']) {
-             sh 'ansible-inventory -i hosts --list -y'
-             sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
-             echo "Service active on ${env.despliegue}"
+            echo "Deploy in dokerhup in proccesing..."
              }   
          }
     
