@@ -2,8 +2,6 @@ pipeline {
    agent any
     tools {
         maven 'maven3.8.8'
-        //jfrog 'artifactory-test'
-        //  dockerHome 'docker-centos'
     }
     parameters {
             string(name: 'fullURL', defaultValue: '')
@@ -20,7 +18,7 @@ pipeline {
                 sh 'mvn clean install -DskipTests -B -ntp'
                 echo '======================= ansible local ==============='
                 sh "set" 
-                   echo "${env.JOB_BASE_NAME}";
+                echo "${env.JOB_BASE_NAME}";
 
             }
         }
