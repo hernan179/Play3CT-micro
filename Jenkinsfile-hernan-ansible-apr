@@ -98,15 +98,11 @@ pipeline {
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullUR
-
+             sh "curl http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping"
              
              }   
          }
-          steps {
-               script {
-                    sh "curl http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping"
-               }
-            }
+ 
 
         }
     }
