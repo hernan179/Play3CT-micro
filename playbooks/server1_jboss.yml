@@ -11,18 +11,9 @@
       src: /home/ubuntu/jboss-eap-7.3.zip
       dest: /home/ubuntu/
       remote_src: yes
-  - name: Clean EAP directory
-      file:
-        state: absent
-        path: "{{ eap_home }}/"
-  - name: Create symlink
-    file:
-      src: "{{eap_home}}"
-      dest: "/home/ubuntu/jboss-eap-7.3"
-      state: link
   - name: Deploy on jboss
     ansible.builtin.get_url:
       url: '{{ dwnld }}'
       dest: /home/ubuntu/jboss-eap-7.3/standalone/deployments/
   - name: Start Jboss
-    command: sh /home/ubuntu/jboss-eap-7.3/bin/standalone.sh -b 0.0.0.0 &
+    ansible.builtin.shell: /home/ubuntu/subirjboss.sh
