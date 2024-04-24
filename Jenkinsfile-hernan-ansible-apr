@@ -108,7 +108,8 @@ pipeline {
                 success {; 
              
                  echo 'TESTING '+env.despliegue
-                    sh 'curl '+env.despliegue                    
+                 response=`curl -k -s -X GET --url env.despliegue`
+                  echo "${response}"                    
                 }
                 always {
                     echo 'Validation finished'
