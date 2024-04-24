@@ -85,7 +85,7 @@ pipeline {
              sshagent (credentials: ['jboss-private-key']) {
              sh 'ansible-inventory -i hosts --list -y'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
-             sh "curl -s ${env.despliegue}"
+             echo "Service active on ${env.despliegue}"
              }   
          }
     

@@ -26,12 +26,6 @@ pipeline {
                     echo 'excuting JUnit...'
                     junit 'target/surefire-reports/*.xml'
                 }
-                always{
-                    echo 'Validation was done'
-                }
-                failure {
-                    echo 'Error was out come while it was processing'
-                }
             }
         }
 		 stage('sonar'){// token   Name: sonar_qube_final , I Used in jenkins with name "sonarqube-credencial2"
