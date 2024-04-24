@@ -69,7 +69,7 @@ pipeline {
                             ]
                         }
                     """
-                  echo uploadSpec;
+                  echo uploadSpec
                   server.upload spec: uploadSpec
                  }
             }
@@ -105,9 +105,9 @@ pipeline {
              }   
          }
          post {
-                success {//def version = pom.version;  def artifactId = pom.artifactId; 
-               def URL = 'http://3.17.160.80:8080/'+env.despliegue+'/contact/ping';
-                 echo 'TESTING '+URL;
+                success {; 
+               def URL = 'http://3.17.160.80:8080/'+env.despliegue+'/contact/ping'
+                 echo 'TESTING '+URL
                     sh 'curl '+URL                    
                 }
                 always {
