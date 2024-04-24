@@ -5,8 +5,15 @@ pipeline {
         //jfrog 'artifactory-test'
         //  dockerHome 'docker-centos'
     }
+    stages{
+        stage("Env Variables"){
+            steps{
+                despliegue 'set'                                                   
+            }
+        }
+    }
     parameters {
-            string(name: 'fullURL', defaultValue: '', name2: 'despliegue', defaultValue2: '')
+            string(name: 'fullURL', defaultValue: '')
     }
 
 
