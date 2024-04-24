@@ -41,7 +41,7 @@ pipeline {
                     def version = pom.version; 
                     def artifactId = pom.artifactId; 
 
-                    env.despliegue = artifactId+version;
+                    env.despliegue = 'http://3.17.160.80:8080/'+artifactId+version+'/contact/ping';
                     
                     def server = Artifactory.server 'artifactory-test'
                     def repository = "Play3CT";
@@ -106,9 +106,9 @@ pipeline {
          }
          post {
                 success {; 
-               def URL = 'http://3.17.160.80:8080/'+env.despliegue+'/contact/ping'
-                 echo 'TESTING '+URL
-                    sh 'curl '+URL                    
+             
+                 echo 'TESTING '+env.despliegue
+                    sh 'curl '+env.despliegue                    
                 }
                 always {
                     echo 'Validation finished'
