@@ -107,8 +107,7 @@ pipeline {
          post {
                 success {; 
              
-                 echo 'TESTING--- '+${env.despliegue}
-                def response = httpRequest '${env.despliegue}'
+                 echo 'TESTING--- ${env.despliegue}'
                 sh 'curl ${env.despliegue}'
           
                 }
