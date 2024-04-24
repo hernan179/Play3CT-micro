@@ -7,15 +7,12 @@ pipeline {
     }
     parameters {
             string(name: 'fullURL', defaultValue: '')
+            string(despliegue: 'despliegue', defaultValue: '')
+            
     }
 
 
     stages {
-         stage("Env Variables"){
-            steps{
-                despliegue 'set'                                                   
-            }
-        }
         stage('Build'){
             steps {
                 echo 'Witout Checkout form jenkingsfile-hernan, implicited was done.. skiptest';
