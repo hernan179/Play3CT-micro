@@ -41,7 +41,7 @@ pipeline {
                     def version = pom.version; 
                     def artifactId = pom.artifactId; 
 
-                    env.despliegue = 'http://3.17.160.80:8080/'+artifactId+version+'/contact/ping';
+                    env.despliegue = 'http://3.17.160.80:8080/'+artifactId+'-'+version+'/contact/ping';
                     
                     def server = Artifactory.server 'artifactory-test'
                     def repository = "Play3CT";
