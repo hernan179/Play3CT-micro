@@ -4,9 +4,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>Play3CT</artifactId>
-	<version>1.2.5</version>
-	<packaging>war</packaging>
+	<artifactId>Play3CT-micro</artifactId>
+	<version>1.0.0.0</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -34,16 +33,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- INI Para despliegue -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- FIN Para despliegue -->
-
-		<!-- add slf4j interfaces to classpath -->
 <dependency>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-api</artifactId>
