@@ -102,11 +102,18 @@ pipeline {
           
              }   
          }
-          steps {
-                 script {
-                       sh 'curl http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping'
-                 }
-          }
+         post {
+                success {
+                    sh 'curl http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping'
+                    
+                }
+                always {
+                    echo 'Validation finished'
+                }
+                failure {
+                    echo 'Error was out come in the processed...'
+                }
+            }
         }
     }
 }
