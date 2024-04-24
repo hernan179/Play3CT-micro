@@ -107,8 +107,8 @@ pipeline {
          post {
                 success {; 
              
-                 echo 'TESTING--- ${env.despliegue}'
-                sh 'curl ${env.despliegue}'
+                 echo 'TESTING--- '+env.despliegue
+                sh "'curl ${env.despliegue}'"
           
                 }
                 always {
