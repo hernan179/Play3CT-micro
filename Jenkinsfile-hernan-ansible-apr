@@ -108,11 +108,11 @@ pipeline {
                 success {; 
              
                  echo 'TESTING--- '+env.despliegue
-                sh "'curl ${env.despliegue}'"
+                sh "curl ${env.despliegue}"
           
                 }
                 always {
-                    echo 'Validation finished'
+                    echo 'Validation finished...'
                 }
                 failure {
                     echo 'Error was out come in the processed...'
