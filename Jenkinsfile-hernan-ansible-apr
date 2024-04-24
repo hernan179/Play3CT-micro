@@ -6,20 +6,15 @@ pipeline {
     parameters {
             string(name: 'fullURL', defaultValue: '')
             string(name: 'despliegue', defaultValue: '')
-            
     }
-
-
     stages {
         stage('Build'){
             steps {
-                echo 'Witout Checkout form jenkingsfile-hernan, implicited was done.. skiptest';
+                echo 'Without Checkout';
                 //git 'https://github.com/hernan179/Play3CT.git'
                 sh 'mvn clean install -DskipTests -B -ntp'
                 echo '======================= ansible local ==============='
                 sh "set" 
-                echo "${env.JOB_BASE_NAME}";
-
             }
         }
          stage('Testing'){
@@ -42,10 +37,10 @@ pipeline {
                 }
             }
         }
-        stage('sonar'){// token   Name: sonar_qube_final , I Used in jenkins with name "sonarqube-credencial2"
+        stage('sonar'){
             steps{
                 echo 'Quality with sonar qube!'
-                withSonarQubeEnv('sonarqube'){ // setting in jenkins conf with credential
+                withSonarQubeEnv('sonarqube'){ 
                     sh 'mvn clean package sonar:sonar'
                 }
                   echo 'passed test with sonarqube...'
@@ -54,22 +49,10 @@ pipeline {
         stage('artifactory'){
             steps {
                  script {
-                     echo '------------------------set-----------------------';
-
-                    
-                   // sh 'env | sort'
-                    echo '----------STAGE_NAME----------------------------';
-
                     def pom = readMavenPom file: 'pom.xml'
-                    //println pom
-
-                 
-
                     def version = pom.version; 
                     def artifactId = pom.artifactId; 
-
                     env.despliegue = 'http://3.17.160.80:8080/'+artifactId+'-'+version+'/contact/ping';
-                    
                     def server = Artifactory.server 'artifactory-test'
                     def repository = "Play3CT";
                     def empack = pom.packaging;
@@ -80,11 +63,6 @@ pipeline {
                          repository = repository + '-PROD'
                     }
                     env.fullURL = server.url+'/'+repository+'/'+artifactId+'-'+version+'.'+empack;
-                    
-                    echo 'DESTINATION TO REPOSITORY ' + repository;
-                    echo 'DESTINATION PROJECT       ' + artifactId;
-                    echo 'DESTINATION VERSION       ' + version;
-                    echo 'DESTINATION FULL PATH     '+env.fullURL;
                     def uploadSpec = """
                         {
                             "files": [
@@ -96,27 +74,17 @@ pipeline {
                             ]
                         }
                     """
-                  echo uploadSpec
                   server.upload spec: uploadSpec
                  }
             }
         }
-
         stage('Deploy'){
             steps {
-            echo "full url of artifactory UPLOAD "+env.fullURL
-
-             echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
              sh 'env | sort'
-             echo '============looking for a jboss-private-key ============='
              sshagent (credentials: ['jboss-private-key']) {
-           
-             echo 'step one Execute command on ubutu install jboss'
              sh 'ansible-inventory -i hosts --list -y'
-             echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
-             echo 'TESTING--- '+env.despliegue
              sh "curl -s ${env.despliegue}"
              }   
          }
