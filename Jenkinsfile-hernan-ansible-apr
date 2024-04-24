@@ -72,7 +72,6 @@ pipeline {
                  }
             }
         }
-
         stage('Deploy'){
             
           
@@ -101,10 +100,14 @@ pipeline {
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
              }   
          }
-        }
-        stage("Validate service"){
+         steps{
             def response = httpRequest 'http://3.17.160.80:8080/Play3CT-1.0.6/contact/ping'
-           echo response.content
+           echo 'response.content'
+         }
+
+         
+         
+
         }
     }
 }
