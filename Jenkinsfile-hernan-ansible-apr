@@ -108,8 +108,9 @@ pipeline {
                 success {; 
              
                  echo 'TESTING--- '+env.despliegue
-                sh "curl ${env.despliegue}"
-          
+
+                def response = sh(script: "curl ${env.despliegue}", returnStdout: true)
+                 echo response
                 }
                 always {
                     echo 'Validation finished...'
