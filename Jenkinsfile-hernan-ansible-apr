@@ -6,7 +6,7 @@ pipeline {
         //  dockerHome 'docker-centos'
     }
     parameters {
-            string(name: 'fullURL', defaultValue: '')
+            string(name: 'fullURL', defaultValue: '',name: 'despliegue', defaultValue: '')
     }
 
 
@@ -39,7 +39,7 @@ pipeline {
                     def version = pom.version; 
                     def artifactId = pom.artifactId; 
 
-        
+                    env.despliegue = artifactId+version;
                     
                     def server = Artifactory.server 'artifactory-test'
                     def repository = "Play3CT";
@@ -104,7 +104,8 @@ pipeline {
          }
          post {
                 success {//def version = pom.version;  def artifactId = pom.artifactId; 
-                    sh 'curl http://3.17.160.80:8080/'+artifactId+version+'/contact/ping'
+                 echo ''
+                    sh 'curl http://3.17.160.80:8080/'+env.despliegue+'/contact/ping'
                     
                 }
                 always {
