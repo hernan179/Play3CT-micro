@@ -98,12 +98,13 @@ pipeline {
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
+
+             def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
+             println("Validate Service: "+response.content)
+
+             
              }   
          }
-
-
-         
-         
 
         }
     }
