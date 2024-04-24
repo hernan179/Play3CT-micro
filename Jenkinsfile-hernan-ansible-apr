@@ -101,24 +101,11 @@ pipeline {
              sh 'ansible-inventory -i hosts --list -y'
              echo 'step two Execute command on ubutu install jboss'
              sh 'ansible-playbook -i hosts playbooks/server1_jboss.yml -e dwnld='+env.fullURL
-          
+             echo 'TESTING--- '+env.despliegue
+             sh "curl -s ${env.despliegue}"
              }   
          }
-         post {
-                success {; 
-             
-                 echo 'TESTING--- '+env.despliegue
-                sh "curl -s ${env.despliegue}"
-                
-          
-                }
-                always {
-                    echo 'Validation finished...'
-                }
-                failure {
-                    echo 'Error was out come in the processed...'
-                }
-            }
+    
         }
     }
 }
