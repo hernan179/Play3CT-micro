@@ -6,7 +6,7 @@ pipeline {
         //  dockerHome 'docker-centos'
     }
     parameters {
-            string(name: 'fullURL', defaultValue: '', name2: 'despliegue', defaultValue2: '')
+            string(name: 'fullURL', defaultValue: '', name: 'despliegue', defaultValue2: '')
     }
 
 
