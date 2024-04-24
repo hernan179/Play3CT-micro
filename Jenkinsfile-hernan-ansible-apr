@@ -106,7 +106,7 @@ pipeline {
          }
          post {
                 success {//def version = pom.version;  def artifactId = pom.artifactId; 
-                URL = 'http://3.17.160.80:8080/'+env.despliegue+'/contact/ping';
+               def URL = 'http://3.17.160.80:8080/'+env.despliegue+'/contact/ping';
                  echo 'TESTING '+URL;
                     sh 'curl '+URL                    
                 }
