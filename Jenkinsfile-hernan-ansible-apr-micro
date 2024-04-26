@@ -1,54 +1,27 @@
 pipeline {
    agent any
-    tools {
-        maven 'maven3.8.8'
+    agent {
+        kubernetes {
+            defaultContainer 'maven'
+            yamlFile 'KubernetesPod.yaml'
+        }
     }
-    parameters {
-            string(name: 'fullURL', defaultValue: '')
-            string(name: 'despliegue', defaultValue: '')
-    }
+
     stages {
-        stage('Build'){
+         stage('Build') {
             steps {
-                echo 'Without Checkout';
-                //git 'https://github.com/hernan179/Play3CT.git'
-                sh 'mvn clean install -DskipTests -B -ntp'
-                echo '======================= ansible local ==============='
-                sh "set" 
-            }
-        }
-         stage('Testing'){
-            steps {
-                echo 'Testing...'
-                sh 'mvn test -B -ntp'
-            }
-            post{
-                success{
-                    echo 'executing jacoco..'
-                    jacoco()
-                    echo 'excuting JUnit...'
-                    junit 'target/surefire-reports/*.xml'
-                }
-                always{
-                    echo 'Validation was done'
-                }
-                failure {
-                    echo 'Error was out come while it was processing'
+                container('maven'){
+                    sh 'cat /etc/os-release'
+                    sh 'mvn clean package -DskipTests -B -ntp'
                 }
             }
         }
-        stage('sonar'){
-            steps{
-                echo 'Quality with sonar qube!'
-                withSonarQubeEnv('sonarqube'){ 
-                    sh 'mvn clean package sonar:sonar'
-                }
-                  echo 'passed test with sonarqube...'
-            }
-        }
-        stage('Deploy'){
+        stage('Deploy'){// deploy k8s minute 2:59 y  37:52 del audio, 
+        // correcto comando es "base64 -w0 your-cert.crt luego cargarlo en jenkins"
+            agent any
             steps {
             echo "Deploy in dokerhup in proccesing..."
+              //sh 'docker build -t shanem/spring-petclinic:latest .'
              }   
          }
     
