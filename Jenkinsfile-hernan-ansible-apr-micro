@@ -24,7 +24,7 @@ pipeline {
 
                     script {
                         def pom = readMavenPom file: 'pom.xml'
-                        def image = "hernan179/${pom.artifactId}:${pom.version}"
+                        def image = "hernan179/${pom.artifactId.toLowerCase()}:${pom.version}"
                         def app = docker.build("${image}")
 
                         docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub-credentials') {
