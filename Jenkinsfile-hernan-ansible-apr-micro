@@ -36,15 +36,22 @@ pipeline {
             }
         }
 
-        stage('Deploy'){// deploy k8s minute 2:59 y  37:52 del audio, 
-        // correcto comando es "base64 -w0 your-cert.crt luego cargarlo en jenkins"
-            agent any
+        stage('k8s deploy') {
             steps {
-            echo "Deploy in dokerhup in proccesing..."
-              //sh 'docker build -t shanem/spring-petclinic:latest .'
-             }   
-         }
-    
+                withKubeConfig([credentialsId: 'kubernetes-credentials']) {
+                    sh 'whoami'
+
+                    sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                    sh 'install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl'
+                    sh 'chmod u+x ./kubectl'
+
+                    sh 'which kubectl'
+                    sh '/usr/local/bin/kubectl version --client --output=yaml'
+                    sh 'kubectl version'
+                    
+                    sh 'kubectl apply -f deployment.yaml'
+                }
+            }
         }
 }
 

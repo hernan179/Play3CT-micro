@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: play3ct-micro
+spec:
+  # replicas: 3
+  selector:
+    matchLabels:
+      app: play3ct-micro
+  template:
+    metadata:
+      labels:
+        app: play3ct-micro
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: play3ct-micro
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          image: hernan179/play3ct-micro
+          ports:
+            - containerPort: 6996
