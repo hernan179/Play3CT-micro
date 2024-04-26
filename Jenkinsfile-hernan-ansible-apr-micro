@@ -15,6 +15,27 @@ pipeline {
                 }
             }
         }
+        stage('Upload image') {
+            steps {
+                container('docker'){
+                    sh 'cat /etc/os-release'
+                    sh 'docker --version'
+                    sh 'whoami'
+
+                    script {
+                        def pom = readMavenPom file: 'pom.xml'
+                        def image = "hernan179/${pom.artifactId}:${pom.version}"
+                        def app = docker.build("${image}")
+
+                        docker.withRegistry('https://registry.hub.docker.com/', 'dockerhub-credentials') {
+                            app.push()
+                            app.push('latest')
+                        }
+                    }
+                }
+            }
+        }
+
         stage('Deploy'){// deploy k8s minute 2:59 y  37:52 del audio, 
         // correcto comando es "base64 -w0 your-cert.crt luego cargarlo en jenkins"
             agent any
